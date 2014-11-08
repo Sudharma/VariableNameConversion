@@ -1,8 +1,9 @@
 package com.zalando.vnc.visitor.VoidVisitor;
 
+import japa.parser.ast.CompilationUnit;
 import japa.parser.ast.body.FieldDeclaration;
 
-import com.zalando.vnc.conversion.strategy.FieldConversionStrategy;
+import com.zalando.vnc.conversion.strategy.AbstractStrategy;
 
 @SuppressWarnings("rawtypes")
 /**
@@ -10,19 +11,23 @@ import com.zalando.vnc.conversion.strategy.FieldConversionStrategy;
  * @author spuranik
  *
  */
-public class FieldNameChanger extends FieldConversionStrategy {
+public class FieldNameChanger {
 
-	FieldConversionStrategy fcs;
+	AbstractStrategy fcs;
 
-	public FieldNameChanger(FieldConversionStrategy fcs) {
+	public FieldNameChanger(AbstractStrategy fcs) {
 		this.fcs = fcs;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public void visit(FieldDeclaration fd, Object arg1) {
-//		System.out.println(fd.getVariables());
+		// System.out.println(fd.getVariables());
 		fcs.visit(fd, arg1);
+	}
+
+	public void visit(CompilationUnit cu, Object arg1) {
+		// System.out.println(fd.getVariables());
+		fcs.visit(cu, arg1);
 	}
 
 }

@@ -8,7 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.zalando.vnc.conversion.strategy.ConstantToLocalFieldStrategy;
+import com.vnc.constant.StrategyTypes;
+import com.zalando.vnc.conversion.strategy.AbstractStrategy;
 import com.zalando.vnc.visitor.VoidVisitor.FieldNameChanger;
 
 /**
@@ -22,18 +23,22 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			
+
 			CompilationUnit cu = readInputs(args);
 
 			System.out.println("############# INPUT IS #####################");
 			System.out.println(cu.toString());
 			/** create a strategy for which you want to have conversion */
-			ConstantToLocalFieldStrategy constantToLocalFieldStrategy = new ConstantToLocalFieldStrategy();
+//			FieldConversionStrategy constantToLocalFieldStrategy = new LocalFieldToConstantStrategy();
+			StrategyTypes inputStrategy = StrategyTypes.valueOf(args[1]);
+			AbstractStrategy fcs = StrategyTypes.valueOf(args[1]).getStrategy(
+					inputStrategy);
 			/** visit and change the FieldName */
-			FieldNameChanger fmc = new FieldNameChanger(
-					constantToLocalFieldStrategy);
+			FieldNameChanger fmc = new FieldNameChanger(fcs);
 
-			String variableName = args[1];
+			String variableName = args[2];
+			
+			
 			fmc.visit(cu, variableName);
 
 			System.out.println("############# OUTPUT IS #####################");
@@ -52,7 +57,7 @@ public class Main {
 	private static CompilationUnit readInputs(String[] args)
 			throws FileNotFoundException, ParseException {
 
-		if (args.length == 0 || args.length != 2) {
+		if (args.length == 0 || args.length != 3) {
 			System.err
 					.println("Please input fileName and variable for conversion");
 			System.out.println("press --help or -h for details");
