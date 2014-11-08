@@ -14,8 +14,8 @@ Build using ant:
 # Running
 
 Running with a Inputfile ,and varible to convert
-java - jar variable-name-conversion.jar InputJavaFile someVariable
-
+java - jar variable-name-conversion.jar InputJavaFile someVariable StrategyTypes.
+Refer StrategyTypes file for filling thirdVariable.
 for help
      java  –h or --help
 
