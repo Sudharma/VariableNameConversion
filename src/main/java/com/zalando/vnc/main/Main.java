@@ -29,16 +29,15 @@ public class Main {
 			System.out.println("############# INPUT IS #####################");
 			System.out.println(cu.toString());
 			/** create a strategy for which you want to have conversion */
-//			FieldConversionStrategy constantToLocalFieldStrategy = new LocalFieldToConstantStrategy();
+			// FieldConversionStrategy constantToLocalFieldStrategy = new
+			// LocalFieldToConstantStrategy();
 			StrategyTypes inputStrategy = StrategyTypes.valueOf(args[1]);
-			AbstractStrategy fcs = StrategyTypes.valueOf(args[1]).getStrategy(
-					inputStrategy);
+			AbstractStrategy fcs = inputStrategy.getStrategy(inputStrategy);
 			/** visit and change the FieldName */
 			FieldNameChanger fmc = new FieldNameChanger(fcs);
 
 			String variableName = args[2];
-			
-			
+
 			fmc.visit(cu, variableName);
 
 			System.out.println("############# OUTPUT IS #####################");
@@ -49,7 +48,10 @@ public class Main {
 			System.err
 					.println("Unable to read the JavaFile, Possible Reasons :: "
 							+ e.getMessage());
-
+		} catch (IllegalArgumentException iae) {
+			System.err
+					.println("Unable to read the JavaFile, Possible Reasons :: "
+							+ iae.getMessage());
 		}
 
 	}
