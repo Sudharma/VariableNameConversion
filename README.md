@@ -6,19 +6,18 @@ Build using ant:
 
 #Prerequisite to Run the program
   
-•	Java 1.8 
-•	If Eclipse , LUNA version.
-•	Ant version > 1.9.0
-•	Junit 4.0
+â€¢	Java 1.8 
+â€¢	If Eclipse , LUNA version.
+â€¢	Ant version > 1.9.0
+â€¢	Junit 4.0
 
 # Running
 
 Running with a Inputfile ,and varible to convert
-
+java - jar variable-name-conversion.jar <input java file> <some variable>
 
 for help
-
-     java  –h or --help
+     java  â€“h or --help
 
 # Design overview
 
@@ -28,7 +27,7 @@ FieldConversionStrategy is base visitor and other childern of the class just giv
 
 Also there is a extension for GenericVisitorAdapter and VoidVisitorAdapter this is because if we need to refactor the returntype of any methods or so , it comes handy.
 
-I have used JavaParser and also guvava  as supporting libraries. If I am correct is the JavaParser the one with bonus points :)?
+I have used JavaParser and also guvava  as supporting libraries. 
 
 
 #Usage : 
