@@ -59,6 +59,12 @@ public class Main {
 	private static CompilationUnit readInputs(String[] args)
 			throws FileNotFoundException, ParseException {
 
+		if (args.length != 0 &&( "-h".equals(args[0].trim()) || "--help".equals(args[0].trim()))) {
+			System.out
+					.println("argument should be as :  <fileName> <StrategyType> <variableName>");
+			System.exit(0);
+		}
+		
 		if (args.length == 0 || args.length != 3) {
 			System.out
 					.println("Please input fileName and variable for conversion");
@@ -66,11 +72,7 @@ public class Main {
 			System.exit(0);
 		}
 		
-		if ("-h".equals(args[0]) || "--help".equals(args[0].trim())) {
-			System.out
-					.println("argument should be as :  <fileName> <StrategyType> <variableName>");
-			System.exit(0);
-		}
+		
 		
 		
 		System.out
