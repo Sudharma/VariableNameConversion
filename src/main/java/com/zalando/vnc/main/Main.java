@@ -67,7 +67,7 @@ public class Main {
 		}
 		if ("-h".equals(args[0]) || "--help".equals(args[0])) {
 			System.out
-					.println("argument should be as :  <fileName> <variableName>");
+					.println("argument should be as :  <fileName> <StrategyType> <variableName>");
 			System.exit(0);
 		}
 
