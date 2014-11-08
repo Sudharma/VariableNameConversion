@@ -14,7 +14,7 @@ Build using ant:
 # Running
 
 Running with a Inputfile ,and varible to convert
-java - jar variable-name-conversion.jar <input java file> <some variable>
+java - jar variable-name-conversion.jar InputJavaFile someVariable
 
 for help
      java  –h or --help
