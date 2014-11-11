@@ -7,6 +7,7 @@ import japa.parser.ast.CompilationUnit;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.zalando.vnc.visitor.VoidVisitor.FieldNameChanger;
@@ -29,9 +30,36 @@ public class TestLocalToConstantConversionStrategy {
 		FieldNameChanger fmc = new FieldNameChanger(
 				constantToLocalFieldStrategy);
 
-		CompilationUnit cu = JavaParser.parse(new File(
+		CompilationUnit output = JavaParser.parse(new File(
 				"src/main/resources/TestCase2.java"));
-		fmc.visit(cu, variableName);
+		CompilationUnit input = JavaParser.parse(new File(
+				"src/main/resources/TestCase2.java"));
+		fmc.visit(output, variableName);
+		/**
+		 * Checking equals because variable comparison via JavaParser is not
+		 * exposed
+		 */
+		/** I know its not really helpful but it checks the class modification */
+		Assert.assertNotEquals(output, input);
+
+	}
+
+	@Test
+	public void testVisitNegative() throws ParseException, IOException {
+		String variableName = "someVariable1";// some wrong variable name
+		/** create a strategy for which you want to have conversion */
+		FieldConversionStrategy constantToLocalFieldStrategy = new LocalFieldToConstantStrategy();
+		/** visit and change the FieldName */
+		FieldNameChanger fmc = new FieldNameChanger(
+				constantToLocalFieldStrategy);
+
+		CompilationUnit output = JavaParser.parse(new File(
+				"src/main/resources/TestCase2.java"));
+		CompilationUnit input = JavaParser.parse(new File(
+				"src/main/resources/TestCase2.java"));
+		fmc.visit(output, variableName);
+		Assert.assertEquals(output, input);
+
 	}
 
 }
