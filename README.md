@@ -33,8 +33,10 @@ I have used JavaParser and also guvava  as supporting libraries.
 #Usage : 
 
 
-The program expects 2 inputs , one is the input java file and other is the variableName which you want to convert. 
-run for --help in arguments for more details.
+The program expects 3 inputs , one is the input java file , StrategyType and variableName which you want to convert. 
+run for --help in arguments for more details. For StrategyType please refer StrategyTypes Class for details. As of now it is 
+LOCAL_TO_CONSTANT and CONSTANT_TO_LOCAL.
+
 As of now the changes are displayed on the console for easy visualization. 
 I assume always you give a correct Variablename because giving wrong does not make a sense and also not a valid usecase.
  
