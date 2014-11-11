@@ -7,6 +7,7 @@ import japa.parser.ast.CompilationUnit;
 import java.io.File;
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.zalando.vnc.visitor.VoidVisitor.FieldNameChanger;
@@ -29,9 +30,29 @@ public class TestConstantToLocalConversionStrategy {
 		FieldNameChanger fmc = new FieldNameChanger(
 				constantToLocalFieldStrategy);
 
-		CompilationUnit cu = JavaParser.parse(new File(
+		CompilationUnit output = JavaParser.parse(new File(
 				"src/main/resources/TestCase1.java"));
-		fmc.visit(cu, variableName);
+		CompilationUnit input = JavaParser.parse(new File(
+				"src/main/resources/TestCase1.java"));
+		fmc.visit(output, variableName);
+		Assert.assertNotEquals(output, input);
+	}
+	
+	@Test
+	public void testVisitNegative() throws ParseException, IOException {
+		String variableName = "SOME_VARIABLE1";
+		/** create a strategy for which you want to have conversion */
+		FieldConversionStrategy constantToLocalFieldStrategy = new ConstantToLocalFieldStrategy();
+		/** visit and change the FieldName */
+		FieldNameChanger fmc = new FieldNameChanger(
+				constantToLocalFieldStrategy);
+
+		CompilationUnit output = JavaParser.parse(new File(
+				"src/main/resources/TestCase1.java"));
+		CompilationUnit input = JavaParser.parse(new File(
+				"src/main/resources/TestCase1.java"));
+		fmc.visit(output, variableName);
+		Assert.assertEquals(output, input);
 	}
 
 }
