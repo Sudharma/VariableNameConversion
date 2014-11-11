@@ -12,5 +12,6 @@ public class TestCase2 {
 		someVariable = SOME_VARIABLE;
 
 	}
-
+	
+	
 }
